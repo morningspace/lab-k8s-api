@@ -2,7 +2,7 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: ClusterServiceVersion
 metadata:
   annotations:
-    alm-examples: '[{"apiVersion":"cache.example.com/v1alpha1","kind":"Memcached","metadata":{"name":"example-memcached"},"spec":{"size":3}}]'
+    alm-examples: '[{"apiVersion":"cache2.example.com/v1alpha1","kind":"Memcached","metadata":{"name":"example-memcached"},"spec":{"size":3}}]'
     capabilities: Basic Install
   name: memcached-operator.v0.5.0
   namespace: placeholder
@@ -11,7 +11,7 @@ spec:
   customresourcedefinitions:
     owned:
     - kind: Memcached
-      name: memcacheds.cache.example.com
+      name: memcacheds.cache2.example.com
       version: v1alpha1
   description: Placeholder description
   displayName: Memcached Operator
@@ -94,7 +94,7 @@ spec:
           verbs:
           - update
         - apiGroups:
-          - cache.example.com
+          - cache2.example.com
           resources:
           - '*'
           verbs:

@@ -5,7 +5,7 @@ metadata:
     alm-examples: |-
       [
         {
-          "apiVersion": "cache.example.com/v1alpha1",
+          "apiVersion": "cache2.example.com/v1alpha1",
           "kind": "Memcached",
           "metadata": {
             "name": "example-memcached"
@@ -25,7 +25,7 @@ spec:
       - description: Represents a cluster of Memcached apps
         displayName: Memcached App
         kind: Memcached
-        name: memcacheds.cache.example.com
+        name: memcacheds.cache2.example.com
         resources:
           - kind: Deployment
             name: ""
@@ -146,7 +146,7 @@ spec:
               verbs:
                 - get
             - apiGroups:
-                - cache.example.com
+                - cache2.example.com
               resources:
                 - '*'
               verbs:

@@ -67,7 +67,7 @@ rules:
   verbs:
   - get
 - apiGroups:
-  - cache.example.com
+  - cache2.example.com
   resources:
   - '*'
   verbs:
