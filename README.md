@@ -13,6 +13,8 @@ Deploy app1-operator first, then have client make the call to create a customer 
 
 Uninstall app1-operator, and install app2-operator, then have client make the same call using the same API group. It will still work even the operator at backend has been changed to use different API group.
 
+![](architecture.png)
+
 ## Tasks
 
 * [x] [Prepare env](docs/prepare-env.md)
