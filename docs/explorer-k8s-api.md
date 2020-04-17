@@ -50,8 +50,10 @@ echo $TOKEN
 
 Explore the API with TOKEN
 ```
-curl -s -X GET $APISERVER/api --header "Authorization: Bearer $TOKEN" --insecure
+curl -i -s -X GET $APISERVER/api --header "Authorization: Bearer $TOKEN" --insecure
+curl -i -s -X GET $APISERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --insecure
 curl -s -X GET $APISERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --insecure
+curl -s -X GET $APISERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --insecure | jq .items[].metadata.name
 ```
 
 ## Accessing Kubernetes API from within a Pod
@@ -71,20 +73,23 @@ echo $SERVICEACCOUNT
 Read this Pod's namespace
 ```
 NAMESPACE=$(kubectl exec $POD_NAME -- cat ${SERVICEACCOUNT}/namespace)
+echo $NAMESPACE
 ```
 
 Read the ServiceAccount bearer token
 ```
 TOKEN=$(kubectl exec $POD_NAME -- cat ${SERVICEACCOUNT}/token)
+echo $TOKEN
 ```
 
 Reference the internal certificate authority (CA)
 ```
 CACERT=${SERVICEACCOUNT}/ca.crt
+echo $CACERT
 ```
 
 Explore the API with TOKEN
 ```
-kubectl exec $POD_NAME -- curl -s --cacert ${CACERT} --header "Authorization: Bearer ${TOKEN}" -X GET ${APISERVER_IN_POD}/api
-kubectl exec $POD_NAME -- curl -s --cacert ${CACERT} --header "Authorization: Bearer ${TOKEN}" -X GET ${APISERVER_IN_POD}/api/v1/namespaces/default/pods
+kubectl exec $POD_NAME -- curl -i -s --cacert ${CACERT} --header "Authorization: Bearer ${TOKEN}" -X GET ${APISERVER_IN_POD}/api
+kubectl exec $POD_NAME -- curl -i -s --cacert ${CACERT} --header "Authorization: Bearer ${TOKEN}" -X GET ${APISERVER_IN_POD}/api/v1/namespaces/default/pods
 ```

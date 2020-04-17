@@ -27,6 +27,8 @@ operator-sdk build $IMAGE
 docker push $IMAGE
 ```
 
+Go to quay.io to make your image public.
+
 Deploy the operator:
 ```
 sed -i 's|REPLACE_IMAGE|quay.io/moyingbj/memcached-operator:v0.0.1|g' deploy/operator.yaml
