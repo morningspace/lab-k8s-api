@@ -71,3 +71,14 @@ Access the proxy on master node again, which returns 200:
 ```
 docker exec kind-control-plane curl -s -i http://127.0.0.1:$PROXY_HTTP_NODEPORT
 ```
+
+Get the node port for the kong admin service:
+```
+ADMIN_NODEPORT=$(kubectl get svc example-kong-kong-admin -o jsonpath="{.spec.ports[0].nodePort}")
+echo $ADMIN_NODEPORT
+```
+
+Access the admin service on master node. It will return the entire Kong configuration:
+```
+docker exec kind-control-plane curl -k https://127.0.0.1:$ADMIN_NODEPORT/ | jq .
+```
