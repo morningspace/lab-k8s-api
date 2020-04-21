@@ -9,7 +9,8 @@
 Clone kong-operator Git repository:
 
 ```shell
-git clone https://github.com/Kong/kong-operator.git
+git clone https://github.com/Kong/kong-operator.git $HOME/kong-operator
+cd $HOME/kong-operator
 ```
 
 Build and push the docker image, then make it publicly available on quay.io:
@@ -96,3 +97,7 @@ Access the admin service on master node. It will return the entire Kong configur
 ```shell
 docker exec kind-control-plane curl -k https://127.0.0.1:$ADMIN_NODEPORT/ | jq .
 ```
+
+<!--
+cd -
+-->
