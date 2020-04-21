@@ -47,8 +47,7 @@ Explore the API with TOKEN
 ```shell
 curl -i -s -X GET $APISERVER/api --header "Authorization: Bearer $TOKEN" --insecure
 curl -i -s -X GET $APISERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --insecure
-curl -s -X GET $APISERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --insecure
-curl -s -X GET $APISERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --insecure | jq .items[].metadata.name
+curl -i -s -X GET $APISERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --insecure | jq .items[].metadata.name
 ```
 
 ## Accessing Kubernetes API from within a Pod
@@ -70,6 +69,7 @@ echo $SERVICEACCOUNT
 Read this Pod's namespace
 
 ```shell
+POD_NAME=$(kubectl get pod -l="app=httpd" -o name)
 NAMESPACE=$(kubectl exec $POD_NAME -- cat ${SERVICEACCOUNT}/namespace)
 echo $NAMESPACE
 ```
