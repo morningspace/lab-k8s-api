@@ -24,6 +24,8 @@ QUES_COLOR="\033[0;33m"
 CURR_COLOR="\033[0;37m"
 NORM_COLOR="\033[0m"
 
+touch .lab.states
+
 function task::print-all {
   local task_dirs=($(find $DOCS_PATH -maxdepth 1 -type d | sort))
 
@@ -138,8 +140,6 @@ DEMO_COMMENT_COLOR=$CYAN
 ########################
 
 START_TIME=$SECONDS
-
-touch .lab.states
 
 trap on_exit exit
 
