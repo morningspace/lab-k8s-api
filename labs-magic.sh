@@ -194,6 +194,7 @@ function task::run-with-logs {
   local file=$1
   local task=$2
   local step=$3
+  local path=`pwd`
   if [[ -n $task && -n $step ]]; then
     sed -e "s/^*/?/g" .lab.states > .lab.states.tmp
     mv .lab.states{.tmp,}
@@ -201,6 +202,7 @@ function task::run-with-logs {
     if cat .lab.states | grep -q -e "^.\? $task $step"; then
       sed -e "s/^? $task $step/* $task $step/g" \
           -e "s/^v $task $step/* $task $step/g" \
+          -e "s/^  $task $step/* $task $step/g" \
         .lab.states > .lab.states.tmp
       mv .lab.states{.tmp,}
     else
@@ -222,6 +224,7 @@ function task::run-with-logs {
   fi
 
   if task::run-file $file && [[ -n $task && -n $step ]]; then
+    cd $path
     sed -e "s/^* $task $step/v $task $step/g" .lab.states > .lab.states.tmp
     mv .lab.states{.tmp,}
   fi
