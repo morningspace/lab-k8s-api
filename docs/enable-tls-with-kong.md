@@ -1,6 +1,6 @@
 # Enable TLS with Kong
 
-« [Deploy Kong operator](docs/deploy-kong-operator.md) | [Main Page](../) | [Put all things together](docs/put-all-things-together.md) »
+« [Deploy Kong operator](deploy-kong-operator.md) | [Main Page](../README.md) | [Put all things together](put-all-things-together.md) »
 
 This is going to enable TLS for Kong for its communication with Kubernetes APIServer as upstream service.
 
@@ -186,7 +186,7 @@ echo $PROXY_HTTPS_NODEPORT
 docker exec kind-control-plane curl -s -i -k https://127.0.0.1:$PROXY_HTTPS_NODEPORT/api
 ```
 
-Compare the results that you get when call the original Kubernetes APIServer endpoint described in [Explore Kubernetes API](docs/explorer-k8s-api.md). They should be the same.
+Compare the results that you get when call the original Kubernetes APIServer endpoint described in [Explore Kubernetes API](explorer-k8s-api.md). They should be the same.
 
 <!--
 

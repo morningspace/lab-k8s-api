@@ -1,6 +1,6 @@
 # Prepare env
 
-[Main Page](../) | [Explore Kubernetes API](explorer-k8s-api.md) »
+[Main Page](../README.md) | [Explore Kubernetes API](explorer-k8s-api.md) »
 
 ## Launch kind
 

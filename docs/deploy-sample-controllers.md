@@ -1,6 +1,6 @@
 # Deploy two sample controllers with different API groups
 
-« [Deploy sample operator](docs/deploy-sample-operator.md) | [Main Page](../) | [Deploy Kong operator](docs/deploy-kong-operator.md) »
+« [Deploy sample operator](deploy-sample-operator.md) | [Main Page](../README.md) | [Deploy Kong operator](deploy-kong-operator.md) »
 
 ## Deploy the first sample operator, app1-operator
 
