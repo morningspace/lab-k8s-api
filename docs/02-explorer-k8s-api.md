@@ -14,13 +14,17 @@ kubectl create clusterrolebinding serviceaccounts-cluster-admin --clusterrole=cl
 
 Check all possible clusters, as your .KUBECONFIG may have multiple contexts:
 
-```shell
+```
 kubectl config view -o jsonpath='{"Cluster name\tServer\n"}{range .clusters[*]}{.name}{"\t"}{.cluster.server}{"\n"}{end}'
 ```
 
+<!--
+kubectl config view -o jsonpath='{"Cluster name\tServer\n"}{range .clusters[*]}{.name}{"\t"}{.cluster.server}{"\n"}{end}'
+-->
+
 Select name of cluster you want to interact with from above output.
 <!--
-var::set "Input the cluster name" "CLUSTER_NAME"
+var::set-required "Input the cluster name" "CLUSTER_NAME"
 var::save "CLUSTER_NAME"
 -->
 
