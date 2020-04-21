@@ -19,6 +19,9 @@ To deploy httpd as a sample application:
 ```shell
 kubectl create deployment httpd --image=httpd
 ```
+<!--
+task::cmd
+-->
 
 ## Test sample application
 

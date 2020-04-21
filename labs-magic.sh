@@ -320,6 +320,17 @@ function task::run-file {
   echo
 }
 
+function task::go {
+  IN_TASK_CMD_LOOP=0
+}
+
+function task::cmd {
+  IN_TASK_CMD_LOOP=1
+  while [[ $IN_TASK_CMD_LOOP == 1 ]]; do
+    cmd
+  done
+}
+
 function task::main {
   local POSITIONAL=()
   while [[ $# -gt 0 ]]; do
