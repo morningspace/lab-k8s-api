@@ -31,37 +31,8 @@ echo $MASTER_CLUSTER_IP
 Create a csr configration file:
 
 ```shell
-cat << EOF > kong-csr.conf
-[ req ]
-default_bits = 2048
-prompt = no
-default_md = sha256
-req_extensions = req_ext
-distinguished_name = dn
-
-[ dn ]
-O = system:masters
-CN = kong
-
-[ req_ext ]
-subjectAltName = @alt_names
-
-[ alt_names ]
-DNS.1 = kubernetes
-DNS.2 = kubernetes.default
-DNS.3 = kubernetes.default.svc
-DNS.4 = kubernetes.default.svc.cluster
-DNS.5 = kubernetes.default.svc.cluster.local
-IP.1 = ${MASTER_IP}
-IP.2 = ${MASTER_CLUSTER_IP}
-
-[ v3_ext ]
-authorityKeyIdentifier=keyid,issuer:always
-basicConstraints=CA:FALSE
-keyUsage=keyEncipherment,dataEncipherment
-extendedKeyUsage=serverAuth,clientAuth
-subjectAltName=@alt_names
-EOF
+cat samples/kong-csr.conf.tmpl | sed -e "s|{{MASTER_IP}}|$MASTER_IP|g" -e "s|{{MASTER_CLUSTER_IP}}|$MASTER_CLUSTER_IP|g" > samples/kong-csr.conf
+cat samples/kong-csr.conf
 ```
 
 Generate the csr:
@@ -172,23 +143,8 @@ docker exec kind-control-plane curl -k https://127.0.0.1:$ADMIN_NODEPORT/service
 To test the connectivity between Kong and Kubernetes APIServer. You need to create the ingress resource for kubernetes service at first:
 
 ```shell
-cat << EOF | oc apply -f -
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: kubernetes-api
-  annotations:
-    kubernetes.io/ingress.class: "kong"
-    konghq.com/protocols: "https"
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /api
-        backend:
-          serviceName: kubernetes
-          servicePort: 443
-EOF
+cat samples/ingress-kubernetes-api.yaml
+oc apply -f samples/ingress-kubernetes-api.yaml
 ```
 
 Then call Kuberntes API via the HTTPs endpoint exposed by Kong.

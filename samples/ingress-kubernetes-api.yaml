@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kubernetes-api
+  annotations:
+    kubernetes.io/ingress.class: "kong"
+    konghq.com/protocols: "https"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /api
+        backend:
+          serviceName: kubernetes
+          servicePort: 443
