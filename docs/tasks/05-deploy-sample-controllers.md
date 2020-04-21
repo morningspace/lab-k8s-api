@@ -27,6 +27,9 @@ Check pods are up and running:
 ```shell
 kubectl get pods --all-namespaces
 ```
+<!--
+task::cmd
+-->
 
 Check CR exists in memcached namespace:
 
@@ -63,6 +66,9 @@ Check pods are up and running:
 ```shell
 kubectl get pods --all-namespaces
 ```
+<!--
+task::cmd
+-->
 
 Check CR exists in memcached namespace:
 

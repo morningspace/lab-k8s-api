@@ -101,7 +101,7 @@ kubectl get pods --v=10
 
 You will see kubectl actually calls the Kuberentes API and the corresponding curl command is as below:
 
-```shell
+```
 curl -k -v -XGET  -H "Accept: application/json;as=Table;v=v1beta1;g=meta.k8s.io, application/json" -H "User-Agent: kubectl/v1.17.3 (linux/amd64) kubernetes/06ad960" 'https://127.0.0.1:32770/api/v1/namespaces/default/pods?limit=500'
 ```
 

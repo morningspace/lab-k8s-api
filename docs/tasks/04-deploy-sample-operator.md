@@ -119,3 +119,12 @@ For the sample application, try below command:
 ```shell
 kubectl apply -f ./deploy/crds/cache.example.com_v1alpha1_memcached_cr.yaml --v=8
 ```
+<!--
+task::cmd
+-->
+
+To uninstall the sample operator:
+
+```shell
+make uninstall
+```
