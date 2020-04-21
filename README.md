@@ -17,11 +17,11 @@ Uninstall app1-operator, and install app2-operator, then have client make the sa
 
 ## Tasks
 
-* [x] [Prepare env](docs/prepare-env.md)
-* [x] [Explore Kubernetes API](docs/explorer-k8s-api.md)
-* [x] [Explore Kubernetes Authentication](docs/explorer-k8s-auth.md)
-* [x] [Deploy sample operator](docs/deploy-sample-operator.md)
-* [x] [Deploy two sample controllers with different API groups](docs/deploy-sample-controllers.md)
-* [x] [Deploy Kong operator](docs/deploy-kong-operator.md)
-* [x] [Enable TLS with Kong](docs/enable-tls-with-kong.md)
-* [ ] [Put all things together](docs/put-all-things-together.md)
+* [x] [Prepare env](docs/01-prepare-env.md)
+* [x] [Explore Kubernetes API](docs/02-explorer-k8s-api.md)
+* [x] [Explore Kubernetes Authentication](docs/03-explorer-k8s-auth.md)
+* [x] [Deploy sample operator](docs/04-deploy-sample-operator.md)
+* [x] [Deploy two sample controllers with different API groups](docs/05-deploy-sample-controllers.md)
+* [x] [Deploy Kong operator](docs/06-deploy-kong-operator.md)
+* [x] [Enable TLS with Kong](docs/07-enable-tls-with-kong.md)
+* [ ] [Put all things together](docs/08-put-all-things-together.md)

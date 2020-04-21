@@ -1,6 +1,6 @@
 # Deploy sample controller
 
-« [Explore Kubernetes Authentication](explorer-k8s-auth.md) | [Main Page](../README.md) | [Deploy two sample controllers with different API groups](deploy-sample-controllers.md) »
+« [Explore Kubernetes Authentication](03-explorer-k8s-auth.md) | [Main Page](../README.md) | [Deploy two sample controllers with different API groups](05-deploy-sample-controllers.md) »
 
 ## Install Operator SDK
 

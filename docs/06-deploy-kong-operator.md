@@ -1,6 +1,6 @@
 # Deploy and test Kong operator
 
-« [Deploy two sample controllers with different API groups](deploy-sample-controllers.md) | [Main Page](../README.md) | [Enable TLS with Kong](enable-tls-with-kong.md) »
+« [Deploy two sample controllers with different API groups](05-deploy-sample-controllers.md) | [Main Page](../README.md) | [Enable TLS with Kong](07-enable-tls-with-kong.md) »
 
 ## Deploy Kong operator
 
