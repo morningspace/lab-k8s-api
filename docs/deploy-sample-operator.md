@@ -1,5 +1,7 @@
 # Deploy sample controller
 
+« [Explore Kubernetes Authentication](docs/explorer-k8s-auth.md) | [Main Page](../) | [Deploy two sample controllers with different API groups](docs/deploy-sample-controllers.md) »
+
 ## Install Operator SDK
 
 Run below commands to install Operator SDK to your local machine:

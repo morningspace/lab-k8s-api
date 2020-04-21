@@ -1,5 +1,7 @@
 # Enable TLS with Kong
 
+« [Deploy Kong operator](docs/deploy-kong-operator.md) | [Main Page](../) | [Put all things together](docs/put-all-things-together.md) »
+
 This is going to enable TLS for Kong for its communication with Kubernetes APIServer as upstream service.
 
 ## Create a client certificate for Kong

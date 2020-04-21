@@ -1,5 +1,7 @@
 # Prepare env
 
+[Main Page](../) | [Explore Kubernetes API](explorer-k8s-api.md) »
+
 ## Launch kind
 
 To create the kind cluster:

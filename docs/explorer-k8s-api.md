@@ -1,5 +1,7 @@
 # Explore Kubernetes API
 
+« [Prepare env](docs/prepare-env.md) | [Main Page](../) |  » [Explore Kubernetes Authentication](docs/explorer-k8s-auth.md)
+
 ## Create role binding for service accounts
 
 ```

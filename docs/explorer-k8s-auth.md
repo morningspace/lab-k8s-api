@@ -1,5 +1,7 @@
 # Explore Kubernetes Authentication
 
+« [Explore Kubernetes API](explorer-k8s-api.md) | [Main Page](../) | [Deploy sample operator](docs/deploy-sample-operator.md) »
+
 ## Using service account token 
 
 Pick up a service account, e.g.:

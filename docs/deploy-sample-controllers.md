@@ -1,5 +1,7 @@
 # Deploy two sample controllers with different API groups
 
+« [Deploy sample operator](docs/deploy-sample-operator.md) | [Main Page](../) | [Deploy Kong operator](docs/deploy-kong-operator.md) »
+
 ## Deploy the first sample operator, app1-operator
 
 Build and push the docker image, then make it publicly available on quay.io:
