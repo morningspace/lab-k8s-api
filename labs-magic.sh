@@ -49,8 +49,8 @@ function task::print-all {
 }
 
 function task::print {
-  local task=${1#*/}
-  task=${task%/*}
+  local task=${1%/*}
+  task=${task##*/}
 
   local step=${1##*/}
   step=${step%.md}
