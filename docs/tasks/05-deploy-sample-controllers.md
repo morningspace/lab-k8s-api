@@ -45,7 +45,7 @@ make uninstall
 Build and push the docker image, then make it publicly available on quay.io:
 
 ```shell
-cd ../app1-operator/
+cd ../app2-operator/
 export IMAGE=quay.io/moyingbj/sample-app2:v0.0.1
 operator-sdk build $IMAGE
 docker push $IMAGE
