@@ -32,7 +32,7 @@ kubectl create -f deploy/role_binding.yaml
 kubectl create -f deploy/operator.yaml
 ```
 <!--
-task:cmd
+task::cmd
 -->
 
 ## Test Kong
@@ -49,7 +49,7 @@ Make sure example kong pod is run and running:
 kubectl get pods -l="helm.sh/chart=kong-1.5.0"
 ```
 <!--
-task:cmd
+task::cmd
 -->
 
 Get the node port of the kong proxy service for HTTP:
