@@ -79,22 +79,23 @@ echo $endpoint
 Then, let's create a separated kubeconfig as below:
 
 ```shell
-kubectl config set-cluster kind-kind --embed-certs=true --server=$endpoint --certificate-authority=./ca.crt --kubeconfig=config.kong
-kubectl config set-credentials kong --client-certificate=kong.crt --client-key=kong.key --embed-certs=true --kubeconfig=config.kong
-kubectl config set-context kind-kind --cluster=kind-kind --user=kong --kubeconfig=config.kong
-kubectl config use-context kind-kind --kubeconfig=config.kong
+# kubectl config set-cluster kind-kind --embed-certs=true --server=$endpoint --certificate-authority=./ca.crt --kubeconfig=kubeconfig
+kubectl config set-cluster kind-kind --server=$endpoint --insecure-skip-tls-verify=true --kubeconfig=kubeconfig
+kubectl config set-credentials kong --client-certificate=kong.crt --client-key=kong.key --embed-certs=true --kubeconfig=kubeconfig
+kubectl config set-context kind-kind --cluster=kind-kind --user=kong --kubeconfig=kubeconfig
+kubectl config use-context kind-kind --kubeconfig=kubeconfig
 ```
 
 To view the generated kubeconfig:
 
 ```shell
-cat config.kong
+cat kubeconfig
 ```
 
 And try to use this kubeconfig file to run kubectl:
 
 ```shell
-kubectl get node --kubeconfig config.kong
+kubectl get node --kubeconfig kubeconfig
 ```
 
 ## Create secret for Kong certificate
@@ -102,6 +103,7 @@ kubectl get node --kubeconfig config.kong
 Create a secrete for the generated Kong certificate which will be used by Kong to authenticate itself when it talks to upstream service.
 
 ```shell
+kubectl delete secret kong-ingress-tls --namespace default
 kubectl create secret tls kong-ingress-tls --namespace default --key kong.key --cert kong.crt
 ```
 
@@ -117,14 +119,17 @@ kubectl get secret kong-ingress-tls -o yaml
 Add `konghq.com/protocol` annotation to kubernetes service to ensure that Kong will use HTTPs as the protocol to communicate with kubernetes service:
 
 ```shell
-kubectl annotate svc kubernetes konghq.com/protocol=https
+kubectl annotate svc kubernetes konghq.com/protocol=https --overwrite
 ```
 
 Add `configuration.konghq.com/client-cert` annotation with the value `kong-ingress-tls` to ask Kong to use the certificate secret when authenticate itself to kubernetes service:
 
 ```shell
-kubectl annotate svc kubernetes configuration.konghq.com/client-cert=kong-ingress-tls
+kubectl annotate svc kubernetes configuration.konghq.com/client-cert=kong-ingress-tls --overwrite
 ```
+<!--
+sleep 3
+-->
 
 ## Test and verify
 
@@ -149,9 +154,15 @@ To test the connectivity between Kong and Kubernetes APIServer. You need to crea
 cat samples/ingress-kubernetes-api.yaml
 oc apply -f samples/ingress-kubernetes-api.yaml
 ```
+
+And, update the Kubernetes API service to enforce its node port to be 32000, so that can be accessed from localhost:
+```shell
+kubectl patch svc/example-kong-kong-proxy --type='json' -p='[{"op": "replace", "path": "/spec/ports/1/nodePort", "value":32000}]'
+```
 <!--
 sleep 3
 -->
+
 Then call Kuberntes API via the HTTPs endpoint exposed by Kong.
 
 ```shell
@@ -161,3 +172,22 @@ docker exec kind-control-plane curl -s -i -k https://127.0.0.1:$PROXY_HTTPS_NODE
 ```
 
 Compare the results that you get when call the original Kubernetes APIServer endpoint described in [Explore Kubernetes API](explorer-k8s-api.md). They should be the same.
+
+### Run kubectl against Kong proxy
+
+To generate a new kubeconfig and point to the Kong proxy exposed as a Kubernetes service to localhost via node port:
+```shell
+cp kubeconfig{,-kong}
+kubectl config set-cluster kind-kind --server=https://127.0.0.1:$PROXY_HTTPS_NODEPORT --insecure-skip-tls-verify=true --kubeconfig=kubeconfig-kong
+cat kubeconfig-kong
+```
+
+To run kubectl against Kubernetes APIServer without Kong proxy:
+```shell
+kubectl get node --kubeconfig kubeconfig --v=8
+```
+
+To run kubectl against Kubernetes APIServer with Kong proxy:
+```shell
+kubectl get node --kubeconfig kubeconfig-kong --v=8
+```

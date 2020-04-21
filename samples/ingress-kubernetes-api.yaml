@@ -13,3 +13,9 @@ spec:
         backend:
           serviceName: kubernetes
           servicePort: 443
+  - http:
+      paths:
+      - path: /openapi
+        backend:
+          serviceName: kubernetes
+          servicePort: 443
