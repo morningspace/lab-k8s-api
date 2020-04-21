@@ -31,7 +31,7 @@ echo $MASTER_CLUSTER_IP
 Create a csr configration file:
 
 ```shell
-cat samples/kong-csr.conf.tmpl | sed -e "s|{{MASTER_IP}}|$MASTER_IP|g" -e "s|{{MASTER_CLUSTER_IP}}|$MASTER_CLUSTER_IP|g" > samples/kong-csr.conf
+cat samples/kong-csr.conf.tmpl | sed -e "s|{{MASTER_IP}}|$MASTER_IP|g" -e "s|{{MASTER_CLUSTER_IP}}|$MASTER_CLUSTER_IP|g" > kong-csr.conf
 cat samples/kong-csr.conf
 ```
 
