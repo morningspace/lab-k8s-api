@@ -25,6 +25,7 @@ CURR_COLOR="\033[0;37m"
 NORM_COLOR="\033[0m"
 
 touch .lab.states
+touch .lab.settings
 
 function task::print-all {
   local task_dirs=($(find $DOCS_PATH -maxdepth 1 -type d | sort))
