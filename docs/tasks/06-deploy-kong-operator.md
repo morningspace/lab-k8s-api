@@ -30,7 +30,6 @@ kubectl create -f deploy/service_account.yaml
 kubectl create -f deploy/role.yaml
 kubectl create -f deploy/role_binding.yaml
 kubectl create -f deploy/operator.yaml
-kubectl create -f deploy/crds/charts_v1alpha1_kong_cr.yaml
 ```
 
 ## Test Kong
@@ -38,7 +37,7 @@ kubectl create -f deploy/crds/charts_v1alpha1_kong_cr.yaml
 Create a CR to have Kong operator deploy a sample Kong proxy:
 
 ```shell
-kubectl create -f deploy/crds/charts_v1alpha1_kong_crd.yaml
+kubectl create -f deploy/crds/charts_v1alpha1_kong_cr.yaml
 ```
 
 Make sure example kong pod is run and running:
