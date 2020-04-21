@@ -2,10 +2,13 @@
 
 « [Explore Kubernetes Authentication](03-explorer-k8s-auth.md) | [Main Page](../README.md) | [Deploy two sample controllers with different API groups](05-deploy-sample-controllers.md) »
 
+---
+
 ## Install Operator SDK
 
 Run below commands to install Operator SDK to your local machine:
-```
+
+```shell
 RELEASE_VERSION=v0.17.0
 curl -LO https://github.com/operator-framework/operator-sdk/releases/download/${RELEASE_VERSION}/operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
 chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu && sudo mkdir -p $HOME/.local/bin/ && sudo cp operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu $HOME/.local/bin/operator-sdk && rm operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
@@ -15,14 +18,16 @@ operator-sdk version
 ## Build and deploy the memcached sample operator
 
 Clone the Git repository:
-```
+
+```shell
 git clone https://github.com/operator-framework/operator-sdk-samples.git
 cd operator-sdk-samples/go/memcached-operator/
 go mod tidy
 ```
 
 Build the docker image and push to quay.io:
-```
+
+```shell
 docker login quay.io
 export IMAGE=quay.io/moyingbj/memcached-operator:v0.0.1
 operator-sdk build $IMAGE
@@ -32,24 +37,28 @@ docker push $IMAGE
 Go to quay.io to make your image public.
 
 Deploy the operator:
-```
+
+```shell
 sed -i 's|REPLACE_IMAGE|quay.io/moyingbj/memcached-operator:v0.0.1|g' deploy/operator.yaml
 make install
 ```
 
 Wait for a while and check if the sample operator and its operands have been up and running:
-```
+
+```shell
 kubectl get all -n memcached
 ```
 
 ## Check the actual when deploy
 
 Enable logs when apply the CR for the sample application:
-```
+
+```shell
 kubectl apply -f ./deploy/crds/cache.example.com_v1alpha1_memcached_cr.yaml --v=8
 ```
 
 Here's an example of how kubectl send the request to API Server behind:
+
 ```
 I0416 18:45:47.981965   13034 loader.go:375] Config loaded from file:  /home/morningspace/.kube/config
 I0416 18:45:47.990393   13034 round_trippers.go:420] GET https://127.0.0.1:32770/openapi/v2?timeout=32s

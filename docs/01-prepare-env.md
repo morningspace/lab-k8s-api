@@ -2,6 +2,8 @@
 
 [Main Page](../README.md) | [Explore Kubernetes API](02-explorer-k8s-api.md) »
 
+---
+
 ## Launch kind
 
 To create the kind cluster:
