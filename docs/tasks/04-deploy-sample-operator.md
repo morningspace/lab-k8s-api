@@ -58,13 +58,7 @@ kubectl get all -n memcached
 
 ## Check the actual requests being sent when deploy
 
-Enable logs when apply the CR for the sample application:
-
-```shell
-kubectl apply -f ./deploy/crds/cache.example.com_v1alpha1_memcached_cr.yaml --v=8
-```
-
-Here's an example of how kubectl send the request to API Server behind:
+You can enable verbose logs when apply CR by running kubectl. Here's an example of how kubectl send the request to API Server behind:
 
 ```
 I0416 18:45:47.981965   13034 loader.go:375] Config loaded from file:  /home/morningspace/.kube/config
@@ -119,4 +113,9 @@ I0416 18:45:48.228993   13034 round_trippers.go:452]     Content-Length: 621
 I0416 18:45:48.229000   13034 round_trippers.go:452]     Date: Thu, 16 Apr 2020 10:45:48 GMT
 I0416 18:45:48.229049   13034 request.go:1017] Response Body: {"apiVersion":"cache.example.com/v1alpha1","kind":"Memcached","metadata":{"annotations":{"kubectl.kubernetes.io/last-applied-configuration":"{\"apiVersion\":\"cache.example.com/v1alpha1\",\"kind\":\"Memcached\",\"metadata\":{\"annotations\":{},\"name\":\"example-memcached\",\"namespace\":\"default\"},\"spec\":{\"size\":3}}\n"},"creationTimestamp":"2020-04-16T10:45:48Z","generation":1,"name":"example-memcached","namespace":"default","resourceVersion":"16599","selfLink":"/apis/cache.example.com/v1alpha1/namespaces/default/memcacheds/example-memcached","uid":"a768fe39-302c-49cf-9487-0b1b469cedc8"},"spec":{"size":3}}
 memcached.cache.example.com/example-memcached created
+```
+
+For the sample application, try below command:
+```shell
+kubectl apply -f ./deploy/crds/cache.example.com_v1alpha1_memcached_cr.yaml --v=8
 ```
