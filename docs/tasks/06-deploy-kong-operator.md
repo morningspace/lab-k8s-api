@@ -62,20 +62,8 @@ docker exec kind-control-plane curl -s -i http://127.0.0.1:$PROXY_HTTP_NODEPORT
 Create a sample ingress:
 
 ```shell
-echo "
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: demo
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: httpd
-          servicePort: 80
-" | kubectl apply -f -
+cat samples/ingress-demo.yaml
+kubectl apply -f samples/ingress-demo.yaml
 ```
 
 Access the proxy on master node again, which returns 200:
