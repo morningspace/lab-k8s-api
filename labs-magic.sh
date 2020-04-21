@@ -259,7 +259,7 @@ function task::run-file {
 
       line=$(echo "$line" | \
         sed -e 's%!\[\(.*\)\](.*)%\1 (See online version of the lab instructions)%g' \
-            -e 's%\[\(.*\)\](.*)%\1%g')
+            -e 's%\[\([^]]*\)\]([^)]*)%\1%g')
 
       # print summary
       if [[ $summary == 1 ]]; then
