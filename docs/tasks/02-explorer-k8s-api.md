@@ -1,6 +1,6 @@
 # Explore Kubernetes API
 
-« [Prepare env](01-prepare-env.md) | [Main Page](../README.md) | [Explore Kubernetes Authentication](03-explorer-k8s-auth.md) »
+« [Prepare env](01-prepare-env.md) | [Main Page](../../README.md) | [Explore Kubernetes Authentication](03-explorer-k8s-auth.md) »
 
 ---
 
@@ -47,7 +47,7 @@ Explore the API with TOKEN
 ```shell
 curl -i -s -X GET $APISERVER/api --header "Authorization: Bearer $TOKEN" --insecure
 curl -i -s -X GET $APISERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --insecure
-curl -i -s -X GET $APISERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --insecure | jq .items[].metadata.name
+curl -s -X GET $APISERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --insecure | jq .items[].metadata.name
 ```
 
 ## Accessing Kubernetes API from within a Pod

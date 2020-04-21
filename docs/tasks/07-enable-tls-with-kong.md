@@ -1,6 +1,6 @@
 # Enable TLS with Kong
 
-« [Deploy Kong operator](06-deploy-kong-operator.md) | [Main Page](../README.md) | [Put all things together](08-put-all-things-together.md) »
+« [Deploy Kong operator](06-deploy-kong-operator.md) | [Main Page](../../README.md) | [Put all things together](08-put-all-things-together.md) »
 
 ---
 
