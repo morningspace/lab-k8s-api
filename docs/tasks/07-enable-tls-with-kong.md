@@ -88,7 +88,7 @@ kubectl config use-context kind-kind --kubeconfig=config.kong
 To view the generated kubeconfig:
 
 ```shell
-cat ~/.kube/config
+cat config.kong
 ```
 
 And try to use this kubeconfig file to run kubectl:
