@@ -67,7 +67,10 @@ Note the `Issuer`, `Subject`, and `Subject Alternative Name` fields.
 You can also configure your kubectl to use this certificate to test if the certifcate works.
 
 Get the API Server endpoint for the cluster:
-
+<!--
+cluster_name="kind-kind"
+var::set-required "Input the cluster name" "cluster_name"
+-->
 ```shell
 endpoint=$(kubectl config view -o jsonpath="{.clusters[?(@.name == \"$cluster_name\")].cluster.server}")
 echo $endpoint
