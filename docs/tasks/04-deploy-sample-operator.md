@@ -8,10 +8,13 @@
 
 Run below commands to install Operator SDK to your local machine:
 
-```shell
+```
 RELEASE_VERSION=v0.17.0
 curl -LO https://github.com/operator-framework/operator-sdk/releases/download/${RELEASE_VERSION}/operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
-chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu && sudo mkdir -p $HOME/.local/bin/ && sudo cp operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu $HOME/.local/bin/operator-sdk && rm operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
+chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
+sudo mkdir -p $HOME/.local/bin/
+sudo cp operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu $HOME/.local/bin/operator-sdk
+rm operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
 operator-sdk version
 ```
 
@@ -20,16 +23,20 @@ operator-sdk version
 Clone the Git repository:
 
 ```shell
-git clone https://github.com/operator-framework/operator-sdk-samples.git
-cd operator-sdk-samples/go/memcached-operator/
+git clone https://github.com/operator-framework/operator-sdk-samples.git $HOME/operator-sdk-samples
+cd $HOME/operator-sdk-samples/go/memcached-operator/
 go mod tidy
 ```
 
-Build the docker image and push to quay.io:
+Set your quay.io user name into $QUAY_USER_NAME, then build the docker image and push to quay.io:
 
+<!--
+QUAY_USER_NAME=moyingbj
+var::set "Input your quay.io user name" "QUAY_USER_NAME"
+-->
 ```shell
 docker login quay.io
-export IMAGE=quay.io/moyingbj/memcached-operator:v0.0.1
+export IMAGE=quay.io/$QUAY_USER_NAME/memcached-operator:v0.0.1
 operator-sdk build $IMAGE
 docker push $IMAGE
 ```
@@ -49,7 +56,7 @@ Wait for a while and check if the sample operator and its operands have been up 
 kubectl get all -n memcached
 ```
 
-## Check the actual when deploy
+## Check the actual requests being sent when deploy
 
 Enable logs when apply the CR for the sample application:
 
