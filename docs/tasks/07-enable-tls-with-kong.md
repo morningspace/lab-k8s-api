@@ -149,7 +149,9 @@ To test the connectivity between Kong and Kubernetes APIServer. You need to crea
 cat samples/ingress-kubernetes-api.yaml
 oc apply -f samples/ingress-kubernetes-api.yaml
 ```
-
+<!--
+sleep 3
+-->
 Then call Kuberntes API via the HTTPs endpoint exposed by Kong.
 
 ```shell
