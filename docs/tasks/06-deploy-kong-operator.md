@@ -62,6 +62,7 @@ docker exec kind-control-plane curl -s -i http://127.0.0.1:$PROXY_HTTP_NODEPORT
 Create a sample ingress:
 
 ```shell
+cd -
 cat samples/ingress-demo.yaml
 kubectl apply -f samples/ingress-demo.yaml
 ```
@@ -84,7 +85,3 @@ Access the admin service on master node. It will return the entire Kong configur
 ```shell
 docker exec kind-control-plane curl -k https://127.0.0.1:$ADMIN_NODEPORT/ | jq .
 ```
-
-<!--
-cd -
--->
