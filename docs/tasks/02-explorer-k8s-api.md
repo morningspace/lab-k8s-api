@@ -12,26 +12,10 @@ kubectl create clusterrolebinding serviceaccounts-cluster-admin --clusterrole=cl
 
 ## Access Kubernetes API directly
 
-Check all possible clusters, as your .KUBECONFIG may have multiple contexts:
-
-```
-kubectl config view -o jsonpath='{"Cluster name\tServer\n"}{range .clusters[*]}{.name}{"\t"}{.cluster.server}{"\n"}{end}'
-```
-
-<!--
-kubectl config view -o jsonpath='{"Cluster name\tServer\n"}{range .clusters[*]}{.name}{"\t"}{.cluster.server}{"\n"}{end}'
--->
-
-Select name of cluster you want to interact with from above output.
-<!--
-var::set-required "Input the cluster name" "CLUSTER_NAME"
-var::save "CLUSTER_NAME"
--->
-
-Point to the API server referring the cluster name
+Get the API Server endpoint for the cluster:
 
 ```shell
-APISERVER=$(kubectl config view -o jsonpath="{.clusters[?(@.name==\"$CLUSTER_NAME\")].cluster.server}")
+APISERVER=$(kubectl config view -o jsonpath="{.clusters[?(@.name==\"k8s-kong-lab\")].cluster.server}")
 echo $APISERVER
 ```
 
