@@ -8,7 +8,7 @@
 
 Run below commands to install Operator SDK to your local machine:
 
-```
+```shell
 RELEASE_VERSION=v0.17.0
 curl -LO https://github.com/operator-framework/operator-sdk/releases/download/${RELEASE_VERSION}/operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
 chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
@@ -29,11 +29,12 @@ go mod tidy
 ```
 
 Set your quay.io user name into $QUAY_USER_NAME, then build the docker image and push to quay.io:
-
 <!--
 QUAY_USER_NAME=moyingbj
 var::set "Input your quay.io user name" "QUAY_USER_NAME"
+var::save "QUAY_USER_NAME"
 -->
+
 ```shell
 docker login quay.io
 export IMAGE=quay.io/$QUAY_USER_NAME/memcached-operator:v0.0.1
@@ -41,12 +42,10 @@ operator-sdk build $IMAGE
 docker push $IMAGE
 ```
 
-Go to quay.io to make your image public.
-
-Deploy the operator:
+Go to quay.io to make your image public, then deploy it:
 
 ```shell
-sed -i 's|REPLACE_IMAGE|quay.io/moyingbj/memcached-operator:v0.0.1|g' deploy/operator.yaml
+sed -i "s|REPLACE_IMAGE|quay.io/$QUAY_USER_NAME/memcached-operator:v0.0.1|g" deploy/operator.yaml
 make install
 ```
 

@@ -13,17 +13,23 @@ git clone https://github.com/Kong/kong-operator.git $HOME/kong-operator
 cd $HOME/kong-operator
 ```
 
-Build and push the docker image, then make it publicly available on quay.io:
+Set your quay.io user name into $QUAY_USER_NAME, then build the docker image and push to quay.io:
+<!--
+QUAY_USER_NAME=moyingbj
+var::set "Input your quay.io user name" "QUAY_USER_NAME"
+var::save "QUAY_USER_NAME"
+-->
 
 ```shell
-operator-sdk build quay.io/moyingbj/kong-operator:v0.2.2
-docker push quay.io/moyingbj/kong-operator:v0.2.2
+docker login quay.io
+operator-sdk build quay.io/$QUAY_USER_NAME/kong-operator:v0.2.2
+docker push quay.io/$QUAY_USER_NAME/kong-operator:v0.2.2
 ```
 
-Deploy it:
+Go to quay.io to make your image public, then deploy it:
 
 ```shell
-sed -i 's|kong-docker-kong-operator.bintray.io/kong-operator:v0.0.0|quay.io/moyingbj/kong-operator:v0.2.2|g' deploy/operator.yaml
+sed -i "s|kong-docker-kong-operator.bintray.io/kong-operator:v0.0.0|quay.io/$QUAY_USER_NAME/kong-operator:v0.2.2|g" deploy/operator.yaml
 kubectl create -f deploy/namespace.yaml
 kubectl create -f deploy/crds/charts_v1alpha1_kong_crd.yaml
 kubectl create -f deploy/service_account.yaml

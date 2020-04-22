@@ -6,19 +6,25 @@
 
 ## Deploy the first sample operator, app1-operator
 
-Build and push the docker image, then make it publicly available on quay.io:
+Set your quay.io user name into $QUAY_USER_NAME, then build the docker image and push to quay.io:
+<!--
+QUAY_USER_NAME=moyingbj
+var::set "Input your quay.io user name" "QUAY_USER_NAME"
+var::save "QUAY_USER_NAME"
+-->
 
 ```shell
+docker login quay.io
 cd ./app1-operator/
-export IMAGE=quay.io/moyingbj/sample-app1:v0.0.1
+export IMAGE=quay.io/$QUAY_USER_NAME/sample-app1:v0.0.1
 operator-sdk build $IMAGE
 docker push $IMAGE
 ```
 
-Deploy it:
+Go to quay.io to make your image public, then deploy it:
 
 ```shell
-sed -i 's|REPLACE_IMAGE|quay.io/moyingbj/sample-app1:v0.0.1|g' deploy/operator.yaml
+sed -i "s|REPLACE_IMAGE|quay.io/$QUAY_USER_NAME/sample-app1:v0.0.1|g" deploy/operator.yaml
 make install
 ```
 
@@ -45,19 +51,19 @@ Uninstall the first sample operator because both two operators are using the sam
 make uninstall
 ```
 
-Build and push the docker image, then make it publicly available on quay.io:
+Build the docker image and push to quay.io:
 
 ```shell
 cd ../app2-operator/
-export IMAGE=quay.io/moyingbj/sample-app2:v0.0.1
+export IMAGE=quay.io/$QUAY_USER_NAME/sample-app2:v0.0.1
 operator-sdk build $IMAGE
 docker push $IMAGE
 ```
 
-Deploy it:
+Go to quay.io to make your image public, then deploy it:
 
 ```shell
-sed -i 's|REPLACE_IMAGE|quay.io/moyingbj/sample-app2:v0.0.1|g' deploy/operator.yaml
+sed -i "s|REPLACE_IMAGE|quay.io/$QUAY_USER_NAME/sample-app2:v0.0.1|g" deploy/operator.yaml
 make install
 ```
 
