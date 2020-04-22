@@ -60,7 +60,7 @@ You will see logs and by going through the logs, the corresponding requests sent
 (3) GET https://127.0.0.1:32000/apis/cache2.example.com/v1alpha1/namespaces/memcached/memcacheds/example-memcached
 (4) GET https://127.0.0.1:32000/api/v1/namespaces/memcached
 (5) POST https://127.0.0.1:32000/apis/cache2.example.com/v1alpha1/namespaces/memcached/memcacheds
-memcached.cache2.example.com/example-memcached created
+    memcached.cache2.example.com/example-memcached created
 ```
 
 1-2. Look for the target custom resource definition from the available resource definition list.
@@ -336,3 +336,59 @@ Response Body:
   }
 }
 ```
+
+## Apply a customer resource where definition does not exist
+
+Run below command to apply a customer resource where the corresponding definition does not exist:
+
+```shell
+kubectl apply -f app1-operator/deploy/crds/cache.example.com_v1alpha1_memcached_cr.yaml -n memcached --kubeconfig kubeconfig --v=8
+```
+
+You will see logs and by going through the logs, the corresponding requests sent to API Server can be summarized as below:
+
+```
+    GET https://127.0.0.1:32000/openapi/v2?timeout=32s
+    GET https://127.0.0.1:32000/api?timeout=32s
+(1) GET https://127.0.0.1:32000/apis?timeout=32s
+    GET https://127.0.0.1:32000/apis/charts.helm.k8s.io/v1alpha1?timeout=32s
+    GET https://127.0.0.1:32000/apis/networking.k8s.io/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/rbac.authorization.k8s.io/v1?timeout=32s
+    GET https://127.0.0.1:32000/apis/rbac.authorization.k8s.io/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/api/v1?timeout=32s
+    GET https://127.0.0.1:32000/apis/storage.k8s.io/v1?timeout=32s
+    GET https://127.0.0.1:32000/apis/apiregistration.k8s.io/v1?timeout=32s
+    GET https://127.0.0.1:32000/apis/storage.k8s.io/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/apiregistration.k8s.io/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/admissionregistration.k8s.io/v1?timeout=32s
+    GET https://127.0.0.1:32000/apis/admissionregistration.k8s.io/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/apiextensions.k8s.io/v1?timeout=32s
+    GET https://127.0.0.1:32000/apis/apiextensions.k8s.io/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/extensions/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/scheduling.k8s.io/v1?timeout=32s
+    GET https://127.0.0.1:32000/apis/scheduling.k8s.io/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/coordination.k8s.io/v1?timeout=32s
+    GET https://127.0.0.1:32000/apis/coordination.k8s.io/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/node.k8s.io/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/discovery.k8s.io/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/configuration.konghq.com/v1?timeout=32s
+    GET https://127.0.0.1:32000/apis/configuration.konghq.com/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/cache2.example.com/v1alpha1?timeout=32s
+    GET https://127.0.0.1:32000/apis/autoscaling/v2beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/apps/v1?timeout=32s
+    GET https://127.0.0.1:32000/apis/events.k8s.io/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/authentication.k8s.io/v1?timeout=32s
+    GET https://127.0.0.1:32000/apis/authentication.k8s.io/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/authorization.k8s.io/v1?timeout=32s
+    GET https://127.0.0.1:32000/apis/authorization.k8s.io/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/autoscaling/v1?timeout=32s
+    GET https://127.0.0.1:32000/apis/certificates.k8s.io/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/autoscaling/v2beta2?timeout=32s
+    GET https://127.0.0.1:32000/apis/batch/v1?timeout=32s
+    GET https://127.0.0.1:32000/apis/batch/v1beta1?timeout=32s
+    GET https://127.0.0.1:32000/apis/networking.k8s.io/v1?timeout=32s
+    GET https://127.0.0.1:32000/apis/policy/v1beta1?timeout=32s
+    error: unable to recognize "app1-operator/deploy/crds/cache.example.com_v1alpha1_memcached_cr.yaml": no matches for kind "Memcached" in version "cache.example.com/v1alpha1"
+````
+
+1. Because it cannot find the customer resource definition for the specified resource, it returns an error.
