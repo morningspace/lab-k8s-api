@@ -68,7 +68,7 @@ echo $PROXY_HTTP_NODEPORT
 Access the proxy on master node, which returns 404, and this is expected:
 
 ```shell
-docker exec kind-control-plane curl -s -i http://127.0.0.1:$PROXY_HTTP_NODEPORT
+docker exec k8s-kong-lab-control-plane curl -s -i http://127.0.0.1:$PROXY_HTTP_NODEPORT
 ```
 
 Create a sample ingress:
@@ -82,7 +82,7 @@ kubectl apply -f samples/ingress-demo.yaml
 Access the proxy on master node again, which returns 200:
 
 ```shell
-docker exec kind-control-plane curl -s -i http://127.0.0.1:$PROXY_HTTP_NODEPORT
+docker exec k8s-kong-lab-control-plane curl -s -i http://127.0.0.1:$PROXY_HTTP_NODEPORT
 ```
 
 Get the node port for the kong admin service:
@@ -95,5 +95,5 @@ echo $ADMIN_NODEPORT
 Access the admin service on master node. It will return the entire Kong configuration:
 
 ```shell
-docker exec kind-control-plane curl -k https://127.0.0.1:$ADMIN_NODEPORT/ | jq .
+docker exec k8s-kong-lab-control-plane curl -k https://127.0.0.1:$ADMIN_NODEPORT/ | jq .
 ```

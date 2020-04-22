@@ -35,7 +35,7 @@ To test application connectivity on worker node:
 ```shell
 CLUSTER_IP=$(kubectl get pod -o wide | grep httpd | awk '{print $6}')
 echo $CLUSTER_IP
-docker exec kind-worker curl -s $CLUSTER_IP
+docker exec k8s-kong-lab-worker curl -s $CLUSTER_IP
 ```
 
 To install curl inside the pod:

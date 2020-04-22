@@ -17,7 +17,7 @@ openssl genrsa -out kong.key 2048
 Find the master node IP:
 
 ```shell
-MASTER_IP=$(kubectl get node kind-control-plane -o jsonpath="{.status.addresses[0].address}")
+MASTER_IP=$(kubectl get node k8s-kong-lab-control-plane -o jsonpath="{.status.addresses[0].address}")
 echo $MASTER_IP
 ```
 
@@ -44,8 +44,8 @@ openssl req -new -key kong.key -out kong.csr -config kong-csr.conf
 Find ca certificate and key from master node:
 
 ```shell
-docker cp kind-control-plane:/etc/kubernetes/pki/ca.crt .
-docker cp kind-control-plane:/etc/kubernetes/pki/ca.key .
+docker cp k8s-kong-lab-control-plane:/etc/kubernetes/pki/ca.crt .
+docker cp k8s-kong-lab-control-plane:/etc/kubernetes/pki/ca.key .
 ```
 
 Then, use this csr along with ca certificate and key to generate the certificate for Kong:
@@ -142,7 +142,7 @@ echo $ADMIN_NODEPORT
 Access the admin service on master node to retrieve the service configuration. Notice the protocol field and client_certificate field for the service named as `default.kubernetes.443`:
 
 ```shell
-docker exec kind-control-plane curl -k https://127.0.0.1:$ADMIN_NODEPORT/services | jq .
+docker exec k8s-kong-lab-control-plane curl -k https://127.0.0.1:$ADMIN_NODEPORT/services | jq .
 ```
 
 To test the connectivity between Kong and Kubernetes APIServer. You need to create the ingress resource for kubernetes service at first:
@@ -165,7 +165,7 @@ Then call Kuberntes API via the HTTPs endpoint exposed by Kong.
 ```shell
 PROXY_HTTPS_NODEPORT=$(kubectl get svc example-kong-kong-proxy -o jsonpath="{.spec.ports[1].nodePort}")
 echo $PROXY_HTTPS_NODEPORT
-docker exec kind-control-plane curl -s -i -k https://127.0.0.1:$PROXY_HTTPS_NODEPORT/api
+docker exec k8s-kong-lab-control-plane curl -s -i -k https://127.0.0.1:$PROXY_HTTPS_NODEPORT/api
 ```
 
 Compare the results that you get when call the original Kubernetes APIServer endpoint described in [Explore Kubernetes API](explorer-k8s-api.md). They should be the same.
