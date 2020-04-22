@@ -1,6 +1,6 @@
 # Understand what kubectl does behind
 
-« [Enable TLS with Kong](07-enable-tls-with-kong.md) | [Main Page](../../README.md) | [Put all things together](09-put-all-things-together.md) »
+« [Enable TLS with Kong](07-enable-tls-with-kong.md) | [Main Page](../../README.md) | [Put all things together](09-url-rewriting-using-kong.md) »
 
 ---
 

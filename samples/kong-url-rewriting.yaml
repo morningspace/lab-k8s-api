@@ -1,0 +1,26 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cache.example.com-api
+  annotations:
+    kubernetes.io/ingress.class: "kong"
+    konghq.com/protocols: "https"
+    plugins.konghq.com: cache.example.com-url-rewriting
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /apis/cache.example.com/(.*)
+        backend:
+          serviceName: kubernetes
+          servicePort: 443
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: cache.example.com-url-rewriting
+config:
+  replace:
+    uri: "/apis/cache2.example.com/$(uri_captures[1])"
+plugin: request-transformer
