@@ -152,7 +152,7 @@ To test the connectivity between Kong and Kubernetes APIServer. You need to crea
 
 ```shell
 cat samples/ingress-kubernetes-api.yaml
-oc apply -f samples/ingress-kubernetes-api.yaml
+kubectl apply -f samples/ingress-kubernetes-api.yaml
 ```
 
 And, update the Kubernetes API service to enforce its node port to be 32000, so that can be accessed from localhost:
