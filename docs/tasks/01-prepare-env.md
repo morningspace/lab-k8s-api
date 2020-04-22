@@ -6,10 +6,15 @@
 
 ## Launch kind
 
-To create the kind cluster:
+Delete existing kind cluster for this lab if there is any:
+```shell
+kind delete cluster --name k8s-kong-lab
+```
+
+Then create a new kind cluster:
 
 ```shell
-kind create cluster --config kind-config.yaml
+kind create cluster --name k8s-kong-lab --config kind-config.yaml
 ```
 
 ## Deploy sample application
@@ -59,4 +64,18 @@ Then test application connectivity on host machine:
 
 ```shell
 curl 127.0.0.1:31000
+```
+
+## Install Operator SDK
+
+Run below commands to install Operator SDK to your local machine:
+
+```shell
+RELEASE_VERSION=v0.17.0
+curl -LO https://github.com/operator-framework/operator-sdk/releases/download/${RELEASE_VERSION}/operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
+chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
+sudo mkdir -p $HOME/.local/bin/
+sudo cp operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu $HOME/.local/bin/operator-sdk
+rm operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
+operator-sdk version
 ```

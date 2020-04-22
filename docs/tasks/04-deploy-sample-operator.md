@@ -4,20 +4,6 @@
 
 ---
 
-## Install Operator SDK
-
-Run below commands to install Operator SDK to your local machine:
-
-```shell
-RELEASE_VERSION=v0.17.0
-curl -LO https://github.com/operator-framework/operator-sdk/releases/download/${RELEASE_VERSION}/operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
-chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
-sudo mkdir -p $HOME/.local/bin/
-sudo cp operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu $HOME/.local/bin/operator-sdk
-rm operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
-operator-sdk version
-```
-
 ## Build and deploy the memcached sample operator
 
 Clone the Git repository:
