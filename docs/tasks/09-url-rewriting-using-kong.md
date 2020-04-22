@@ -14,36 +14,6 @@ See how it looks:
 cat samples/kong-url-rewriting.yaml
 ```
 
-You should see something as below:
-```
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: cache.example.com-api
-  annotations:
-    kubernetes.io/ingress.class: "kong"
-    konghq.com/protocols: "https"
-    plugins.konghq.com: cache.example.com-url-rewriting
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /apis/cache.example.com/(.*)
-        backend:
-          serviceName: kubernetes
-          servicePort: 443
----
-apiVersion: configuration.konghq.com/v1
-kind: KongPlugin
-metadata:
-  name: cache.example.com-url-rewriting
-config:
-  replace:
-    uri: "/apis/cache2.example.com/$(uri_captures[1])"
-plugin: request-transformer
-```
-
 It includes an ingress defined specific to /apis/cache.example.com, and a Kong plugin called request-transformer, which is used to define the rewrite rule.
 
 Let's apply it:
@@ -51,6 +21,9 @@ Let's apply it:
 ```shell
 kubectl apply -f samples/kong-url-rewriting.yaml
 ```
+<!--
+sleep 3
+-->
 
 ## Test and verify
 
