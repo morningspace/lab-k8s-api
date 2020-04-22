@@ -320,11 +320,14 @@ function task::run-file {
   echo
 }
 
-function task::go {
+function c {
   IN_TASK_CMD_LOOP=0
 }
 
 function task::cmd {
+  pp "You are still in Labs Magic, but now can run shell command as needed, for example, to check something manually."
+  pp "To continue to the next step, type 'c' and press Enter key."
+
   IN_TASK_CMD_LOOP=1
   while [[ $IN_TASK_CMD_LOOP == 1 ]]; do
     cmd
