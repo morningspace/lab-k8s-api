@@ -69,18 +69,18 @@ You can also configure your kubectl to use this certificate to test if the certi
 Get the API Server endpoint for the cluster:
 
 ```shell
-endpoint=$(kubectl config view -o jsonpath="{.clusters[?(@.name == \"k8s-kong-lab\")].cluster.server}")
+endpoint=$(kubectl config view -o jsonpath="{.clusters[?(@.name == \"kind-k8s-kong-lab\")].cluster.server}")
 echo $endpoint
 ```
 
 Then, let's create a separated kubeconfig as below:
 
 ```shell
-# kubectl config set-cluster k8s-kong-lab --embed-certs=true --server=$endpoint --certificate-authority=./ca.crt --kubeconfig=kubeconfig
-kubectl config set-cluster k8s-kong-lab --server=$endpoint --insecure-skip-tls-verify=true --kubeconfig=kubeconfig
+# kubectl config set-cluster kind-k8s-kong-lab --embed-certs=true --server=$endpoint --certificate-authority=./ca.crt --kubeconfig=kubeconfig
+kubectl config set-cluster kind-k8s-kong-lab --server=$endpoint --insecure-skip-tls-verify=true --kubeconfig=kubeconfig
 kubectl config set-credentials kong --client-certificate=kong.crt --client-key=kong.key --embed-certs=true --kubeconfig=kubeconfig
-kubectl config set-context k8s-kong-lab --cluster=k8s-kong-lab --user=kong --kubeconfig=kubeconfig
-kubectl config use-context k8s-kong-lab --kubeconfig=kubeconfig
+kubectl config set-context kind-k8s-kong-lab --cluster=kind-k8s-kong-lab --user=kong --kubeconfig=kubeconfig
+kubectl config use-context kind-k8s-kong-lab --kubeconfig=kubeconfig
 ```
 
 To view the generated kubeconfig:
@@ -175,7 +175,7 @@ Compare the results that you get when call the original Kubernetes APIServer end
 To generate a new kubeconfig and point to the Kong proxy exposed as a Kubernetes service to localhost via node port:
 ```shell
 cp kubeconfig{,-kong}
-kubectl config set-cluster k8s-kong-lab --server=https://127.0.0.1:$PROXY_HTTPS_NODEPORT --insecure-skip-tls-verify=true --kubeconfig=kubeconfig-kong
+kubectl config set-cluster kind-k8s-kong-lab --server=https://127.0.0.1:$PROXY_HTTPS_NODEPORT --insecure-skip-tls-verify=true --kubeconfig=kubeconfig-kong
 cat kubeconfig-kong
 ```
 

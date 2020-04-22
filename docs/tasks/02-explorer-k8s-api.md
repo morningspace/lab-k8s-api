@@ -15,7 +15,7 @@ kubectl create clusterrolebinding serviceaccounts-cluster-admin --clusterrole=cl
 Get the API Server endpoint for the cluster:
 
 ```shell
-APISERVER=$(kubectl config view -o jsonpath="{.clusters[?(@.name==\"k8s-kong-lab\")].cluster.server}")
+APISERVER=$(kubectl config view -o jsonpath="{.clusters[?(@.name==\"kind-k8s-kong-lab\")].cluster.server}")
 echo $APISERVER
 ```
 
