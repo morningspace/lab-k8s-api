@@ -24,5 +24,5 @@ Uninstall app1-operator, and install app2-operator, then have client make the sa
 * [x] [Deploy two sample controllers with different API groups](docs/tasks/05-deploy-sample-controllers.md)
 * [x] [Deploy Kong operator](docs/tasks/06-deploy-kong-operator.md)
 * [x] [Enable TLS with Kong](docs/tasks/07-enable-tls-with-kong.md)
-* [ ] [Understand what kubectl does behind](docs/tasks/08-understand-what-kubectl-does.md)
+* [x] [Understand what kubectl does behind](docs/tasks/08-understand-what-kubectl-does.md)
 * [ ] [Put all things together](docs/tasks/09-put-all-things-together.md)
