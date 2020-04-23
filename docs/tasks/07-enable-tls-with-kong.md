@@ -130,6 +130,13 @@ sleep 3
 
 ## Test and verify
 
+To test the connectivity between Kong and Kubernetes APIServer. You need to create the ingress resource for kubernetes service at first:
+
+```shell
+cat samples/ingress-kubernetes-api.yaml
+kubectl apply -f samples/ingress-kubernetes-api.yaml
+```
+
 Now, you should be able to use Kong admin API to check the annotated service.
 
 Get the node port for the Kong admin service:
@@ -145,14 +152,7 @@ Access the admin service on master node to retrieve the service configuration. N
 docker exec k8s-kong-lab-control-plane curl -k https://127.0.0.1:$ADMIN_NODEPORT/services | jq .
 ```
 
-To test the connectivity between Kong and Kubernetes APIServer. You need to create the ingress resource for kubernetes service at first:
-
-```shell
-cat samples/ingress-kubernetes-api.yaml
-kubectl apply -f samples/ingress-kubernetes-api.yaml
-```
-
-And, update the Kubernetes API service to enforce its node port to be 32000, so that can be accessed from localhost:
+Update the Kubernetes API service to enforce its node port to be 32000, so that can be accessed from localhost:
 ```shell
 kubectl patch svc/example-kong-kong-proxy --type='json' -p='[{"op": "replace", "path": "/spec/ports/1/nodePort", "value":32000}]'
 ```
