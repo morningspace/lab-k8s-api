@@ -29,7 +29,8 @@ Uninstall app1-operator, and install app2-operator, then have client make the sa
 * [ ] Enable TLS termination for Kong
 * [ ] Enable TLS passthrough for Kong
 * [ ] Request and response body transformation
-* [ ] Call Kubernetes API via Kong in cluster
+* [ ] Allow kubectl talk to Kubernetes via Kong
+* [ ] Call Kubernetes API via Kong inside cluster
 * [ ] Enable logging for Kong
 * [ ] Enable metrics for Kong
 * [ ] Put all things together
