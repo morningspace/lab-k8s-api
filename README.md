@@ -26,10 +26,10 @@ Uninstall app1-operator, and install app2-operator, then have client make the sa
 * [x] [Enable TLS re-encryption for Kong](docs/tasks/07-enable-tls-with-kong.md)
 * [x] [Understand what kubectl does behind](docs/tasks/08-understand-what-kubectl-does.md)
 * [x] [URL rewriting using Kong](docs/tasks/09-url-rewriting-using-kong.md)
+* [ ] Enable TLS passthrough for Kong (WIP)
 * [ ] Enable TLS termination for Kong
-* [ ] Enable TLS passthrough for Kong
-* [ ] Request and response body transformation
-* [ ] Call Kubernetes API via Kong in cluster
+* [ ] Call Kubernetes API via Kong inside cluster (WIP)
+* [ ] Run kubectl to apply custom resource using Kong (WIP)
 * [ ] Enable logging for Kong
 * [ ] Enable metrics for Kong
 * [ ] Put all things together
