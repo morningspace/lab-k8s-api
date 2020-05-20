@@ -27,7 +27,7 @@ sleep 3
 
 ## Test and verify
 
-To verify it, let's get the HTTPs node port for Kong proxy:
+To verify url rewriting, let's get the HTTPs node port for Kong proxy:
 
 ```shell
 PROXY_HTTPS_NODEPORT=$(kubectl get svc example-kong-kong-proxy -o jsonpath="{.spec.ports[1].nodePort}")
@@ -42,3 +42,18 @@ curl -s -i -k https://127.0.0.1:$PROXY_HTTPS_NODEPORT/apis/cache2.example.com/v1
 ```
 
 They should return the same response.
+
+To verify payload rewriting, send post to /apis/cache.example.com/v1alpha1 to create a custom resource:
+Check the payload first:
+
+```shell
+cat samples/test.json
+```
+
+Send the Post:
+
+```shell
+curl -ikX POST "https://127.0.0.1:$PROXY_HTTPS_NODEPORT/apis/cache.example.com/v1alpha1/namespaces/memcached/memcacheds"  -H 'Content-Type: application/json' -d@samples/test.json
+```
+
+The response should be 201 Created.

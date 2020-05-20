@@ -23,4 +23,6 @@ metadata:
 config:
   replace:
     uri: "/apis/cache2.example.com/$(uri_captures[1])"
+    body:
+    - “apiVersion:cache2.example.com/v1alpha1"
 plugin: request-transformer
