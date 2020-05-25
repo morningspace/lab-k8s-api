@@ -86,7 +86,7 @@ spec:
   - port: 9000
     backend:
       serviceName: kubernetes
-      servicePort: 80
+      servicePort: 443
 " | kubectl apply -f -
 ```
 
